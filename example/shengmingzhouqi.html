@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生命周期</title>
+</head>
+<body>
+	<h1>生命周期</h1>
+	<hr>
+	<div id="app">
+		<div>	
+			<span v-text="count"></span>
+			<button @click="add">Add</button>
+		</div>
+		<img src="../image/smzq.png" style="margin-top: 50px">
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				count:1
+			},
+			methods:{
+				add: function(){
+					return this.count++;
+				}
+			},
+			beforeCreate:function(){
+				console.log("1---beforeCreate 初始化之后");
+			},
+			created:function(){
+				console.log("2---created 创建完成");
+			},
+			beforeMount:function(){
+				console.log("3---beforeMount 挂载之前");
+			},
+			mounted:function(){
+				console.log("4---被创建")
+			}
+		})
+	</script>
+</body>
+</html>

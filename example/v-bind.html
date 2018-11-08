@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-bind指令</title>
+	<style type="text/css">
+		.classA{
+			color: red;
+		}
+		.classB{
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+	<h1>v-bind指令，绑定html标签中的属性</h1>
+	<hr>
+	<div id="app">
+		<div>
+			<h3>绑定src & href</h3>
+			<img v-bind:src="imgSrc" >
+			<div><a :href="linkHref" target="_blank">技术胖</a></div>
+		</div>
+		<hr>
+		<div>
+			<h3>绑定class</h3>
+			<div :class="className">绑定class</div>
+			<div :class="{classA:isOk}">正确显示红色，错误显示黑色</div>
+		</div>
+		<hr>
+		<div>
+			<p><input type="checkbox" value="isOk" id="isOk" name="" v-model="isOk"><label for="isOk">isOk={{isOk}}</label></p>
+		</div>
+		<hr>
+		<div :class="[classA,classB]">class绑定数组</div>
+		<hr>
+		<div :class="isOk?classA:classB">三元运算符</div>
+		<hr>
+		<div :style="{color:fontColor,fontSize:fontSize}">绑定style</div>
+		<hr>
+		<div :style="styleObj">直接用对象绑定style</div>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				imgSrc: "http://jspang.com/static//myimg/blogtouxiang.jpg",
+				linkHref: "http://jspang.com/",
+				className: "classB",
+				isOk: true,
+				classA: "classA",
+				classB: "classB",
+				fontColor: "#ff9900",
+				fontSize: "30px",
+				styleObj:{
+					color: "green",
+					fontSize: "10px"
+				}
+			}
+		})
+	</script>
+</body>
+</html>

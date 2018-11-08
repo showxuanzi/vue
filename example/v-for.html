@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-for实例</title>
+</head>
+<body>
+	<h1>v-for实例</h1>
+	<hr>
+	<div id="app">
+		<ul>
+			<!-- 修改排序之后要用新的名字sortItems 不用之前的名字item -->
+			<li v-for="item in sortItems">{{item}}</li>
+		</ul>
+		<hr>
+		<ul>
+			<li v-for="(student,index) in students">{{index+1}} : {{student.name}}--{{student.age}}</li>
+		</ul>
+	</div>
+	<hr>
+	<h2>需要哪个标签循环就写到哪个标签上</h2>
+	<h3>computed表示在输出items之前进行的操作</h3>
+	<div>在输出之前给数组排个序，用computed:属性</div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: "#app",
+			data: {
+				items: [12,32,53,84,50,65,47,81,19,5],
+				students: [
+						{name: "Bob",age: 20},
+						{name: "Lili",age: 10},
+						{name: "Angela",age: 18}
+				]
+			},
+			computed:{
+				sortItems:function(){
+					// return this.items.sort(function(a,b){
+					// 	return a - b;
+					// });
+					return this.items.sort(sortNumber);
+				},
+				sortStudents:function(){
+					return sortByKey(this.students,"age");
+				}
+			},
+			methods:{
+				
+			}
+		});
+		function sortNumber(a,b){
+			return a - b;
+		}
+		//数组对象方法排序:
+		function sortByKey(array,key){
+		    return array.sort(function(a,b){
+		      var x = a[key];
+		      var y = b[key];
+		      return ((x<y)?-1:((x>y)?1:0));
+		   });
+		}
+	</script>
+</body>
+</html>

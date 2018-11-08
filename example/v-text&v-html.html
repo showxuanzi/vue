@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-text & v-html</title>
+</head>
+<body>
+	<h1>v-text & v-html</h1>
+	<hr>
+	<div id="app">
+		<div>{{message1}}</div>
+		<div v-text="message2"></div>
+		<div v-html="showHtml"></div>
+		<hr>
+		<h3>用{{}}和v-text的区别</h3>
+		<ul>
+			<li>当javascript报错或者网速比较慢的时候，用{{}}时会显示两个花括号及变量名字，用户体验不好</li>
+			<li>用v-text可以完美避开这个问题</li>
+		</ul>
+		<h4>尽量不要用v-html，在生产中动态渲染html是非常危险的，容易导致xss攻击</h4>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				message1: "1 hello world!",
+				message2: "2 hello world!",
+				showHtml: "<h2>带html标签并且要显示</h2>"
+			}
+		})
+	</script>
+</body>
+</html>

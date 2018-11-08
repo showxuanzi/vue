@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.extend扩展实例构造器</title>
+</head>
+<body>
+	<h1>Vue.extend扩展实例构造器</h1>
+	<div>Vue.extend 返回的是一个“扩展实例构造器”，也就是预设了部分选项的Vue实力构造器。</div>
+	<div>经常服务于Vue.component用来生成组件，可以简单理解为当在模板中遇到该组件名称作为标签的自定义元素时，会自动调用“扩展实例构造器”来生产组件实例，并挂载到自定义元素上。</div>
+	<hr>
+	<author></author>
+	<div id="author"></div>
+	<div id="another"></div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		//Vue.$extend 中的date 必须是一个返回值
+		var author =  Vue.extend({
+			template: "<p><a :href='authorUrl' target='_blank'>{{name}}</a></p>",
+			data: function(){
+				return {
+					name: "my name",
+					authorUrl: "http://www.jspang.com"
+				}
+			}
+		});
+		// $mount() 手动挂载到DOM元素上
+		// 若在实例化vue的时候指定el，则该vue将对渲染在此el对应的dom中，若没有指定el，则用$mount()手动执行挂载
+		new author().$mount("author");
+		new author().$mount("#author");
+
+
+
+		// 使用propsData
+		var another = Vue.extend({
+		  template: "<p><a :href='url' target='_blank'>{{author}} & {{name}} -- {{age}}</a></p>",
+		  data : function() {
+		    return {
+		      author : 'vamous',
+		      url : 'http://blog.csdn.net/Dear_Mr/article/details/72614370'
+		    }
+		  },
+		  props : ['name','age']
+		});
+
+		new another({propsData: {name : 'dear_mr',age: '20'}}).$mount('#another');
+
+
+		
+	</script>
+</body>
+</html>

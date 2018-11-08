@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.directive自定义指令</title>
+</head>
+<body>
+	<h1>Vue.directive自定义指令</h1>
+	<hr>
+	<div id="app">
+		<p v-red="color">数字 {{num}}</p>
+		<p v-size="size">数字 {{num}}</p>
+		<p><button @click="add">Add</button></p>
+		<p><button @click="sub">Sub</button></p>
+		<p><button onclick="unbind()">解除绑定</button></p>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		//自定义指令接收两个参数，一是指令名称（red），二是回调函数（function或者是一个对象，对象里是钩子函数）
+		//钩子函数的参数(el,binding,vnode,oldVnode)
+		//el表示调用该自定义指令的DOM元素
+		//binding是一个对象，包含
+		//name（指令名）、
+		//binding（对象，包含value——指令的绑定值、oldValue——指令绑定的前一个值【仅在update和componentUpdate中使用】、arg——传给指令的参数、modifiers——一个包含修饰符的对象）
+		//vnode Vue编译生成的虚拟节点
+		//oldVnode 上一个虚拟节点，仅在update和componentUpdate中可用
+		Vue.directive("red",function(el,binding,vnode,oldVnode){
+			el.style = "color:"+binding.value;
+			// console.log(el);
+			// console.log(binding);
+		});
+		Vue.directive("size",{
+			bind:function(el,binding){
+				console.log(el);
+				console.log(binding)
+				el.style = "font-size:" + binding.value;
+				console.log("1——bind：只调用一次，指令第一次绑定到元素时调用")
+			},
+			inserted:function(){
+				console.log("2-inserted: 被绑定元素插入父节点时调用")
+			},
+			update:function(){
+				console.log("3-update: 所有组件的VNode更新时调用，但是可能发生在其子VNode更新之前")
+			},
+			componentUpdated:function(){
+				console.log("4-componentUpdated: 指令所在组件的VNode及其子VNode全部更新后调用")
+			},
+			unbind:function(){
+				console.log("5-unbind： 只调用一次，指令与元素解绑时调用")
+			}
+		});
+
+		var app = new Vue({
+			el:"#app",
+			data:{
+				num: 0,
+				color: "red",
+				size: "30px"
+			},
+			methods:{
+				add:function(){
+					return this.num++;
+				},
+				sub:function(){
+					return this.num--;
+				}
+			}
+		});
+		// 解除绑定事件，解除所有事件
+		function unbind(){
+			app.$destroy();
+		}
+	</script>
+</body>
+</html>

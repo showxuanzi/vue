@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>其他指令</title>
+	<style type="text/css">
+		[v-cloak]{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<h1>其他指令</h1>
+		<div>
+			<h3>v-pre,在模板中跳过vue的编译，直接输出原始值</h3>
+			<div v-pre>{{message}}</div>
+		</div>
+		<div>
+			<h3>v-cloak,渲染完成整个DOM后才显示，必须和CSS一起使用</h3>
+			<div v-cloak>llall</div>
+		</div>
+		<div>
+			<h3>v-once</h3>
+			<div v-once>只在第一次渲染的时候加载{{message}}</div>
+			<input type="text" name="" v-model="message">
+			<div>{{message}}</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: "#app",
+			data:{
+				message: "Hello World!"
+			}
+		})
+	</script>
+</body>
+</html>

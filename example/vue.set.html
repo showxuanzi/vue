@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue.set</title>
+</head>
+<body>
+	<h1>vue.set</h1>
+	<hr>
+	<div id="app">
+		<p>{{count}}</p>
+		<p><button onclick="add()">Add</button></p>
+		<ul>
+			<li v-for="item in arr">{{item}}</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var outDate = {
+			count: 1,
+			name: "Alice",
+			arr: ["one","two","three"]
+		};
+		var app = new Vue({
+			el:"#app",
+			data: outDate
+		});
+		function add(){
+			// 改变数值的3种方法
+			// 第一种 
+			// Vue.set(outDate,"count",4);
+			// 第二种 
+			// app.count++;
+			// 第三种
+			// outDate.count++;
+			// app.arr[1] = "four";//不起作用，在js中用下标的方式改数组元素或者改变数组长度js执行器会检测到,vue不会更新，所以要用Vue.set
+			// 如果加上上一句，会起作用，因为上一句改变都没元素了
+			Vue.set(app.arr,1,"four");
+		}
+	</script>
+</body>
+</html>
