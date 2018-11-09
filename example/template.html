@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Template模板</title>
+</head>
+<body>
+	<h1>Template三种模板</h1>
+	<hr>
+	<div id="app">{{message}}</div>
+	<!-- 第二种，template标签模板 -->
+	<template id="two">
+		<h2 style="color: red">template标签模板</h2>
+	</template>
+	<!-- 第三种，script标签模板 -->
+	<script type="x-template" id="three">
+		<h2 style="color: red">script标签模板</h2>
+	</script>
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		//第一种，选项模板，用于内容较少的模板
+		// var app = new Vue({
+		// 	el:"#app",
+		// 	data:{
+		// 		message: "hello world!"
+		// 	},
+		// 	template: `
+		// 		<h2 style="color:red">选项模板</h2>
+		// 	`
+		// });
+		// 第二种，template标签模板，用于内容较多的模板
+		// var app = new Vue({
+		// 	el:"#app",
+		// 	data:{
+		// 		message: "hello world!"
+		// 	},
+		// 	template: "#two"
+		// });
+		// 第三种，script标签模板，可外部引用
+		var app = new Vue({
+			el:"#app",
+			data:{
+				message: "hello world!"
+			},
+			template: "#three"
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>component组件props属性</title>
+</head>
+<body>
+	<h1>component-2 props属性</h1>
+	<hr>
+	<div id="app">
+		<xia like="zhangyixing"></xia>
+		<p>---------------当出现-时，在vue中用小驼峰命名---------------------</p>
+		<xia like="zhangyixing" dis-like="zhaohailong"></xia>
+		<p>------------------------绑定属性-------------------------</p>
+		<xia v-bind:like="name" :dis-like="name2"></xia>
+	</div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script> 
+	<script type="text/javascript">
+		// 在app这个构造器中定义一个局部组件，只能在app中调用
+		var app = new Vue({
+			el:"#app",
+			data:{
+				name: "摩登兄弟",
+				name2: "xxxxx"
+			},
+			components:{
+				"xia":{
+					template: `
+						<h3 style="color:blue">小夏喜欢{{like}}，不喜欢{{disLike}}</h3>
+					`,
+					props:["like","disLike"]
+				}
+			}
+		});
+	</script>
+</body>
+</html>

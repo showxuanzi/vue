@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>component父子组件</title>
+</head>
+<body>
+	<h1>component-3 父子组件</h1>
+	<hr>
+	<div id="app">
+		<xia></xia>
+	</div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script> 
+	<script type="text/javascript">
+		//------ 子组件一定要先定义在使用 -------
+		var likeComponent = {
+			template:`<p>这是子组件的内容</p>`
+		};
+		var xiaComponent = {
+			template: `
+				<div>
+					<h3 style="color:blue">小夏喜欢夏天</h3>
+					<like></like>
+				</div>
+			`,
+			components:{
+				"like":likeComponent
+			}
+		};
+		var app = new Vue({
+			el:"#app",
+			components:{
+				"xia": xiaComponent
+			}
+		});
+	</script>
+</body>
+</html>

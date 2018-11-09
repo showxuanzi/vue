@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>component组件基础</title>
+</head>
+<body>
+	<h1>component-1 组件基础</h1>
+	<h5>组件——组件注册的是一个标签</h5>
+	<h5>指令——指令注册的是已有标签的属性</h5>
+	<hr>
+	<div id="app">
+		<xmx></xmx>
+		<xia></xia>
+	</div>
+	<div id="another">
+		<xmx></xmx>
+		<!-- <xia></xia> 此处调用会报错-->
+	</div>
+	<script type="text/javascript" src="../assets/js/vue.js"></script> 
+	<script type="text/javascript">
+		//全局组件，只要在Vue作用域内都可以调用
+		Vue.component("xmx",{
+			template:`
+				<h2 style="color:red">全局xmx组件</h2>
+			`
+		});
+		// 在app这个构造器中定义一个局部组件，只能在app中调用
+		var app = new Vue({
+			el:"#app",
+			components:{
+				"xia":{
+					template: `
+						<h3 style="color:green">app内的局部组件</h3>
+					`
+				}
+			}
+		});
+		var another = new Vue({
+			el: "#another"
+		});
+	</script>
+</body>
+</html>
