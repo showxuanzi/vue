@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>propsData option</title>
+</head>
+<body>
+	<h1>propsData</h1>
+	<h3>propsData的作用是——在单页应用中来保持状态和数据的</h3>
+	<h4>用propsData三部解决传值</h4>
+	<ol>
+		<li>在全局扩展里加入props进行接收————{propsData:{para:"参数参数"}}</li>
+		<li>传递时用propsData进行传递————props:["para"]</li>
+		<li>用插值的形式写入模板————{{para}}</li>
+	</ol>
+	<h2>注意：propsData在实际中用的不多，可以用模板解决</h2>
+	<hr>
+	<div id="app">
+		<header></header>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var myHeader = Vue.extend({
+			template:`<p>{{message}}-----{{para}}</p>`,
+			data: function(){
+				return {
+					message: "It is my header!"
+				}
+			},
+			props: ["para"]
+		});
+		new myHeader({propsData:{para: "参数参数"}}).$mount("header");
+	</script>
+</body>
+</html>
