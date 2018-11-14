@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>watch选项 监控数据</title>
+</head>
+<body>
+	<h1>watch选项</h1>
+	<hr>
+	<div id="app">
+		<p>今日温度：{{temperature}}°</p>
+		<p>穿衣指数：{{dress}}</p>
+		<p><button @click="raise">升高温度</button></p>
+		<p><button @click="reduce">降低温度</button></p>
+		<h4>watch：{}——watch下是一对象，对象中的key是要监控的变量名字</h4>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var dressArr = ["羽绒服","毛呢大衣","风衣+马丁靴","短袖牛仔裤"];
+		var app = new Vue({
+			el:"#app",
+			data:{
+				temperature: 10,
+				dress: "毛呢大衣"
+			},
+			methods:{
+				raise:function(){
+					return this.temperature += 5;
+				},
+				reduce:function(){
+					return this.temperature -=5;
+				}
+			},
+			// watch:{
+			// 	temperature:function(){
+			// 		if(this.temperature >= 25){
+			// 			this.dress = dressArr[3];
+			// 		}else if(this.temperature < 25 && this.temperature >= 15){
+			// 			this.dress = dressArr[2];
+			// 		}else if(this.temperature < 15 && this.temperature >= 0){
+			// 			this.dress = dressArr[1];
+			// 		}else{
+			// 			this.dress = dressArr[0];
+			// 		}
+			// 	}
+			// }
+		});
+		// 用实例属性写watch监控
+		app.$watch("temperature",function(){
+			if(this.temperature >= 25){
+				this.dress = dressArr[3];
+			}else if(this.temperature < 25 && this.temperature >= 15){
+				this.dress = dressArr[2];
+			}else if(this.temperature < 15 && this.temperature >= 0){
+				console.log(dressArr[1])
+				this.dress = dressArr[1];
+			}else{
+				this.dress = dressArr[0];
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>mixins 混入选项操作</title>
+</head>
+<body>
+	<h1>mixins 混入选项操作</h1>
+	<h3>mixins的两种用途</h3>
+	<ol>
+		<li>构造器写好只好，需要增加发方法或者临时的活动使用的方法，此时用混入选项会减少源代码的污染</li>
+		<li>很多地方会用到的公共方法，用混入的方法可以减少代码量，实现代码重用</li>
+	</ol>
+	<h4>混入的先执行，原生的后执行，全局的混入比构造器里的混入先执行</h4>
+	<hr>
+	<div id="app">
+		<p>{{num}}</p>
+		<p><button @click="add">Add</button></p>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var changeConsole = {
+			updated: function(){
+				console.log("数据发生变化了，变成了："+this.num+"————————执行顺序2");
+			}
+		};
+		// 全局的混入，Vue.mixin
+		Vue.mixin({
+			updated:function(){
+				console.log("全局的混入————————执行顺序1")
+			}
+		});
+		var app = new Vue({
+			el:"#app",
+			data:{
+				num: 1
+			},
+			methods:{
+				add:function(){
+					return this.num++;
+				}
+			},
+			updated:function(){
+				console.log("原生的构造器里的updated方法————————执行顺序3");
+			},
+			mixins:[changeConsole]
+		})
+	</script>
+</body>
+</html>

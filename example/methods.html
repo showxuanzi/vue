@@ -9,26 +9,37 @@
 	<hr>
 	<div id="app">
 		<p>{{num}}</p>
-		<p><button @click="add(3)">Add</button></p>
+		<h4>点击事件中参数$event相当于原生的mouseEvent</h4>
+		<p><button @click="add(2,$event)">Add</button></p>
+		<h4>组件调用构造器里的方法，需要用到.native修饰器</h4>
+		<p><btn @click.native="add(3,$event)"></btn></p>
 	</div>
+	<button onclick="app.add(4,event)">外部调用构造器里的方法</button>
 
 	<script type="text/javascript" src="../assets/js/vue.js"></script>
 	<script type="text/javascript">
+		var btn = {
+			template: `<button>组件Add</button>`
+		};
 		var app = new Vue({
 			el:"#app",
 			data:{
 				num:1
 			},
+			components:{
+				"btn": btn
+			},
 			methods:{
-				add:function(para){
+				add:function(para,event){
 					if(para != ""){
 						this.num += para;
 					}else{
 						this.num++;
 					}	
+					console.log(event);
 				}
 			}
-		})
+		});
 	</script>
 </body>
 </html>

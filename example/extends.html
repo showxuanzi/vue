@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>extends option 扩展选项</title>
+</head>
+<body>
+	<h1>extends option 扩展选项</h1>
+	<h4>扩展中的方法名与构造器中的原生方法相同时，扩展中的方法会被忽略</h4>
+	<h4>修改插值方法，用delimiters选项————数组对应两个值，插值前后的符号</h4>
+	<hr>
+	<div id="app">
+		<!-- <p>{{num}}</p> -->
+		<p>${num}</p>
+		<p><button @click="add">Add</button></p>
+	</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript">
+		var extendOption = {
+			updated:function(){
+				console.log("扩展的updated");
+			},
+			methods:{
+				add:function(){
+					console.log("扩展里的方法");
+					return this.num++;
+				}
+			}
+		};
+		var app = new Vue({
+			el:"#app",
+			data:{
+				num: 0
+			},
+			methods:{
+				add:function(){
+					console.log("构造器的原生方法");
+					return this.num++;
+				}
+			},
+			updated:function(){
+				console.log("构造器的原生updated");
+			},
+			extends:extendOption,
+			delimiters:["${","}"]
+		});
+	</script>
+</body>
+</html>
