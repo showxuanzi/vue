@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue和jquery一起使用</title>
+</head>
+<body>
+	<h1>vue和jquery一起使用</h1>
+	<hr>
+	<div id="app">{{message}}</div>
+
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:"#app",
+			data:{
+				message: "hello world!"
+			},
+			mounted:function(){
+				$("#app").html("用jquery渲染的哟！");
+			},
+			methods:{
+				add:function(){
+					console.log("调用了add方法");
+				}
+			}
+		});
+		app.add();
+		console.log(app);
+	</script>
+</body>
+</html>
